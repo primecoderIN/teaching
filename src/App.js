@@ -1,11 +1,14 @@
-import './App.css';
-import Form from './components/Form';
 
+import './App.css';
+import CreditCardForm from './components/CreditCardForm';
 
 function App() {
 
+//Commented for demo
   return (
-   <Form/>
+    <div className="App">
+       <CreditCardForm />
+    </div>
   );
 }
 
