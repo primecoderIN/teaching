@@ -1,0 +1,15 @@
+.App{
+    display: flex;
+    gap: 1rem;
+}
+.item {
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+   
+}
+
+label, input {
+    cursor: pointer;
+}
+
