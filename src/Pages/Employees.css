@@ -1,0 +1,12 @@
+.Wrapper{
+    padding: 3rem;
+    margin: 3rem;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    display: flex;
+    gap: 1rem;
+}
+
+.FormWrapper,.EmployeesList{
+    width: 50%;
+}

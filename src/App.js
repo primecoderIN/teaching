@@ -1,44 +1,32 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./App.css";
-import Form from "./components/Form";
-import Tasks from "./components/Tasks";
+import Employees from "./Pages/Employees";
 
-function App() {
-  const [tasks, setTasks] = useState([]);
+const App = () => {
 
-  const getAllTasks = async () => {
-    //This function will get us all the list of tasks which
-    //we will use to render
-    const response = await axios.get("http://localhost:4000/api/v1/tasks");
-    if (response?.status === 200 && response?.data) {
-      setTasks(response.data);
-      // console.log(response.data)
-    }
+    //Treat this state as database
+  const [employees, setEmployees] = useState([
+   
+  ]);
+
+  //A function to add new employee
+  const addNewEmployee = (employee) => {
+    console.log("Hello")
+    setEmployees([...employees, employee]);
   };
 
-  const deleteOneTask = async (TaskID) => {
-    console.log(`Task with task id ${TaskID} deleted `)
-    //This function will get us all the list of tasks which
-    //we will use to render
-    const response = await axios.delete(
-      `http://localhost:4000/api/v1/tasks/${TaskID}`
-    );
-    if (response?.status === 200 && response?.data) {
-      console.log("Task deleted");
-    }
+  //A function to edit/update existing employee
+  const updateOneEmployee = (employee) => {
+    console.log("Employee Updated");
   };
-
-  useEffect(() => {
-    getAllTasks();
-  }, []);
 
   return (
-    <div className="App">
-      <Tasks {...tasks} deleteOneTask={deleteOneTask} />
-      <Form />
-    </div>
+    <Employees
+      employees={employees}
+      addNewEmployee={addNewEmployee}
+      updateOneEmployee={updateOneEmployee}
+    />
   );
-}
+};
 
 export default App;
