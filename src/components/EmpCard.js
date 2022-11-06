@@ -1,4 +1,4 @@
-const EmployeeCard = ({ name, email, empId }) => {
+const EmployeeCard = ({ name, email, empId, setPageMode,id ,getSingleEmployee}) => {
   return (
     <div className="User">
       <div className="userDetail">
@@ -11,6 +11,10 @@ const EmployeeCard = ({ name, email, empId }) => {
       <div className="userDetail">
         <span>Emp Id</span> <span>{empId}</span>
       </div>
+      <button onClick={()=> {
+        setPageMode("edit");
+        getSingleEmployee(id)
+      }}>Edit</button>
     </div>
   );
 };

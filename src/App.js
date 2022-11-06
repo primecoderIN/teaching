@@ -3,28 +3,39 @@ import "./App.css";
 import Employees from "./Pages/Employees";
 
 const App = () => {
+  //Treat this state as database
+  const [employees, setEmployees] = useState(
+    JSON.parse(localStorage.getItem("employees")) || []
+  );
 
-    //Treat this state as database
-  const [employees, setEmployees] = useState([
-   
-  ]);
+  //State for editing employee
+  const [employee, setEmployee] = useState({});
 
   //A function to add new employee
   const addNewEmployee = (employee) => {
-    console.log("Hello")
-    setEmployees([...employees, employee]);
+    //Copied values from state and added new employee and the same wil be replaced in state
+    const allEmployees = [...employees, employee];
+    localStorage.setItem("employees", JSON.stringify(allEmployees));
+    setEmployees(allEmployees);
   };
 
-  //A function to edit/update existing employee
-  const updateOneEmployee = (employee) => {
-    console.log("Employee Updated");
+  //Get Current user to edit data and then passing in employee form to prefill inputs there
+
+  const getSingleEmployee = (id) => {
+    //Job of this function is just to find the user to update
+    const employee = employees.find((emp) => {
+      return emp.id === id;
+    });
+    console.log("emp", employee);
+    setEmployee(employee);
   };
 
   return (
     <Employees
       employees={employees}
       addNewEmployee={addNewEmployee}
-      updateOneEmployee={updateOneEmployee}
+      getSingleEmployee={getSingleEmployee}
+      employee={employee}
     />
   );
 };

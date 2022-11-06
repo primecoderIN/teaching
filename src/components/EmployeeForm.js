@@ -1,13 +1,16 @@
 import {useState} from "react";
 
 const EmployeeForm = ({
-  // name,
-  // email,
-  // empId,
   submitButtonText,
-  addNewEmployee
+  addNewEmployee,
+  employee,
+  pageMode
 }) => {
-  const [employee,setEmployee] = useState({name: "", email: "", empId: ""})
+
+
+  const [employeeDetail, setEmployee] = useState(
+   { name: "", email: "", empId: "" }
+  );
 
   const handleInputChange = e => {
     const {name,value} = e.target;
@@ -20,7 +23,7 @@ const EmployeeForm = ({
         <input
           type="text"
           placeholder="Enter Name"
-          value={employee.name}
+          value={pageMode === "edit" ? employee.name : employeeDetail.name}
           name="name"
           onChange={handleInputChange}
         />
@@ -31,7 +34,7 @@ const EmployeeForm = ({
         <input
           type="text"
           placeholder="Enter Email"
-          value={employee.email}
+          value={pageMode === "edit" ? employee.email : employeeDetail.email}
           name="email"
           onChange={handleInputChange}
         />
@@ -42,13 +45,19 @@ const EmployeeForm = ({
         <input
           type="text"
           placeholder="Enter Employee Id"
-          value={employee.empId}
+          value={pageMode === "edit" ? employee.empId : employeeDetail.empId}
           name="empId"
           onChange={handleInputChange}
         />
       </div>
 
-      <button onClick={ () =>addNewEmployee(employee)}>{submitButtonText}</button>
+      <button
+        onClick={() =>
+          addNewEmployee({ ...employee, id: new Date().valueOf() })
+        }
+      >
+        {submitButtonText}
+      </button>
     </div>
   );
 };
